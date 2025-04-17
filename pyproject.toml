@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zygote_injection_toolkit"
+version = "0.1"
+dependencies = [
+  "pure-python-adb==0.3.0.dev0",
+  "aidl@git+https://github.com/MatrixEditor/aidl-parser"
+]
+requires-python = ">=3"
+description = "Toolkit for exploiting Android zygote injection (CVE-2024-31317)"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+classifiers = [
+  "Programming Language :: Python"
+]
