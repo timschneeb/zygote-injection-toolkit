@@ -5,6 +5,7 @@ import shlex
 from typing import Any
 from io import BytesIO
 from warnings import warn
+from pathlib import Path
 
 import aidl
 
@@ -64,7 +65,7 @@ def parse_boolean_result(result: bytes) -> bool:
     return bool(number)
 
 
-with open("IOemLockService.aidl") as handle:
+with open(Path(__file__).parent.parent / "IOemLockService.aidl") as handle:
     oem_lock_service_aidl = handle.read()
 oem_lock_service = parse_aidl_interface(
     aidl.fromstring(oem_lock_service_aidl), "IOemLockService"
