@@ -133,7 +133,6 @@ class Stage2Exploit:
             oem_unlock_allowed = self.call_service(
                 device_socket, "oem_lock", "isOemUnlockAllowed"
             )
-            allowed_by_carrier = False
             if not allowed_by_carrier:
                 print(
                     "OEM unlock is blocked by carrier, attempting to remove carrier lock"
