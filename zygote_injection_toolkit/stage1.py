@@ -223,6 +223,7 @@ class Stage1Exploit:
     def exploit_stage1(self) -> bool:
         if self.is_port_open(1234):
             print("The exploit is already running!")
+            self.device.forward("tcp:1234", "tcp:1234")
             return True
 
         # make sure the hidden_api_blacklist_exemptions variable is reset
