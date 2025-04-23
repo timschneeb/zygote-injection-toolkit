@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "zygote_injection_toolkit"
 version = "0.1"
 dependencies = [
-  "pure-python-adb==0.3.0.dev0",
+  "pure-python-adb@git+https://github.com/Anonymous941/pure-python-adb",
   "aidl@git+https://github.com/MatrixEditor/aidl-parser"
 ]
 requires-python = ">=3"
