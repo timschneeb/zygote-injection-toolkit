@@ -3,6 +3,11 @@ This is a Python command-line utility to easily run and backup private app data 
 To run this, you must have any device that has _not_ been updated to the [June 1, 2024 security patch](https://source.android.com/security/bulletin/2024-06-01).  If you don't know whether your device is vulnerable or not, simply run the script and it will check for you.
 
 To run it, you need to have ADB installed and USB debugging enabled.
+### Installation
+To install, simply run `pip install git+https://github.com/Anonymous941/pure-python-adb`.  
+If you would like to make changes, instead clone the repository using `git clone` and run `pip install -e .`.  This will let you modify the files.
+### Usage
+Make sure USB debugging is enabled and ADB is running (this can be done by running `adb start-server`, or almost any other ADB command).  Then simply run `python -m zygote_injection_toolkit`
 ### About the exploit
 **This is not a root exploit!**  It is not possible to run apps requiring root, or install any Magisk modules.  If you are already rooted, then you do not need to run this exploit.
 
