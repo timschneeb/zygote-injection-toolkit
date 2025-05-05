@@ -8,7 +8,7 @@ To install or update, simply run `pip install --upgrade git+https://github.com/A
 
 If you would like to make changes to the source code, instead clone the repository using `git clone` and run `pip install -e .`.  This will install it in [development mode](https://setuptools.pypa.io/en/latest/userguide/development_mode.html).
 ### Usage
-Make sure USB debugging is enabled and ADB is running (this can be done by running `adb start-server`, or almost any other ADB command).  Then simply run `python -m zygote_injection_toolkit`
+Make sure USB debugging is enabled and ADB is running (this can be done by running `adb start-server`, or almost any other ADB command).  Then simply run `python -m zygote_injection_toolkit`.  If the exploit runs successfully, you should have a reverse shell on port 1234 (on your host and the Android device), running with `system` priviledges.  It will also automatically attempt to force-enable OEM unlocking.
 ### About the exploit
 **This is not a root exploit!**  It is not possible to run apps requiring root, or install any Magisk modules.  If you are already rooted, then you do not need to run this exploit.
 
