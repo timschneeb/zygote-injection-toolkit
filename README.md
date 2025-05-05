@@ -4,8 +4,9 @@ To run this, you must have any device that has _not_ been updated to the [June 1
 
 To run it, you need to have ADB installed and USB debugging enabled.
 ### Installation
-To install or update, simply run `pip install --upgrade git+https://github.com/Anonymous941/zygote-injection-toolkit`.  
-If you would like to make changes, instead clone the repository using `git clone` and run `pip install -e .`.  This will let you modify the files.
+To install or update, simply run `pip install --upgrade git+https://github.com/Anonymous941/zygote-injection-toolkit`.
+
+If you would like to make changes to the source code, instead clone the repository using `git clone` and run `pip install -e .`.  This will install it in [development mode](https://setuptools.pypa.io/en/latest/userguide/development_mode.html).
 ### Usage
 Make sure USB debugging is enabled and ADB is running (this can be done by running `adb start-server`, or almost any other ADB command).  Then simply run `python -m zygote_injection_toolkit`
 ### About the exploit
