@@ -16,3 +16,6 @@ license = "GPL-3.0-or-later"
 classifiers = [
   "Programming Language :: Python"
 ]
+
+[tool.setuptools.package-data]
+zygote_injection_toolkit = ["*.aidl"]
