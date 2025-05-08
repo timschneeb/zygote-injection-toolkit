@@ -232,6 +232,10 @@ class Stage1Exploit:
         )
 
         exploit_type = self.exploit_type()
+        if exploit_type == "new":
+            print("Using new (Android 12+) exploit type")
+        elif exploit_type == "old":
+            print("Using old (pre-Android 12) exploit type")
 
         netcat_command = self.find_netcat_command()
         parsed_netcat_command = shlex.join(netcat_command)
