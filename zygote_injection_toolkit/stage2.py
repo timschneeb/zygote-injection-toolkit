@@ -9,8 +9,8 @@ from pathlib import Path
 
 import aidl
 
-from .exceptions import *
-from .parcel import *
+from zygote_injection_toolkit.exceptions import *
+from zygote_injection_toolkit.parcel import *
 
 
 def swap_endianness(bytes_: bytes) -> bytes:

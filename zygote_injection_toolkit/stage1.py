@@ -5,7 +5,7 @@ import datetime
 from typing import Optional, Union
 from enum import Enum
 
-from .exceptions import *
+from zygote_injection_toolkit.exceptions import *
 
 from ppadb.client import Client as AdbClient
 

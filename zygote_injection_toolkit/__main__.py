@@ -1,7 +1,7 @@
 import sys
 
-from .stage1 import Stage1Exploit
-from .stage2 import Stage2Exploit
+from zygote_injection_toolkit.stage1 import Stage1Exploit
+from zygote_injection_toolkit.stage2 import Stage2Exploit
 
 
 def main() -> None:
