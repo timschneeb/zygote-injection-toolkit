@@ -1,0 +1,28 @@
+version = 1
+revision = 3
+requires-python = ">=3"
+
+[[package]]
+name = "aidl"
+version = "0.2.3"
+source = { git = "https://github.com/MatrixEditor/aidl-parser#14ea6359e9e8f4c52c2267e319c0e5541cc8151d" }
+
+[[package]]
+name = "pure-python-adb"
+version = "0.3.0.dev0"
+source = { git = "https://github.com/Anonymous941/pure-python-adb#4d8eb69b013caa12b4d45efa1058ffa0f8e614d4" }
+
+[[package]]
+name = "zygote-injection-toolkit"
+version = "0.1"
+source = { editable = "." }
+dependencies = [
+    { name = "aidl" },
+    { name = "pure-python-adb" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "aidl", git = "https://github.com/MatrixEditor/aidl-parser" },
+    { name = "pure-python-adb", git = "https://github.com/Anonymous941/pure-python-adb" },
+]
