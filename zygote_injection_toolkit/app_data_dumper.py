@@ -89,9 +89,8 @@ class AppDataDumper:
             try:
                 while True:
                     if not exploit.exploit_stage1():
-                        time.sleep(0.5)
-                        self.port += 1
-                        print(f"\t...retrying on port {self.port}...")
+                        time.sleep(1)
+                        print(f"\t...retrying")
                         attempts += 1
                         if attempts >= 3:
                             failed_uid_pkg_map[uid] = pkgs
