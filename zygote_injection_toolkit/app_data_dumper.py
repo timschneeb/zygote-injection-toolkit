@@ -67,10 +67,13 @@ class AppDataDumper:
         uid_pkg_map = self.list_uids()
         failed_uid_pkg_map = {}
         
+        processed_uid_count = 0
         for uid, pkgs in uid_pkg_map.items():
+            processed_uid_count += 1
             self.port += 1
             
-            print(f"Dumping UID {uid} on port {self.port} with package(s): '{"System" if (uid == 1000) else ', '.join(pkgs)}'")
+            percentage = (processed_uid_count / len(uid_pkg_map)) * 100
+            print(f"[{percentage:.1f}%] Dumping UID {uid} on port {self.port} with package(s): '{"System" if (uid == 1000) else ', '.join(pkgs)}'")
         
             exploit = Stage1Exploit(port=self.port, target_uid=uid, target_package=pkgs[0], silent=True)
             
